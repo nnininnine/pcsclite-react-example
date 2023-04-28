@@ -100,12 +100,12 @@ function App() {
         <h6>
           {device !== undefined
             ? `connected device: ${device.productName}`
-            : "No connected device"}
+            : "No connected device asd"}
         </h6>
         <button
           onClick={() => {
             console.log("on click");
-            connect();
+            connectTake2();
           }}
         >
           Connect device
