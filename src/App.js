@@ -21,6 +21,8 @@ function App() {
       await device.selectConfiguration(1);
       await device.claimInterface(0);
 
+      setDevice(device);
+
       // Send the APDU to get the UID of the card
       const response = await device.transferOut(
         1,
@@ -101,7 +103,7 @@ function App() {
         <h6>
           {device !== undefined
             ? `connected device: ${device.productName}`
-            : "No connected device asd"}
+            : "No connected device"}
         </h6>
         <button
           onClick={() => {
