@@ -17,7 +17,7 @@ function App() {
 
       // Select the first configuration and interface
       await device.selectConfiguration(1);
-      await device.claimInterface(1);
+      await device.claimInterface(0);
 
       setDevice(device);
 
