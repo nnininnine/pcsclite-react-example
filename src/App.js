@@ -18,8 +18,8 @@ function App() {
       await device.open();
 
       // Select the first configuration and interface
-      await device.selectConfiguration(1);
-      await device.claimInterface(0);
+      // await device.selectConfiguration(1);
+      // await device.claimInterface(0);
 
       setDevice(device);
 
@@ -28,6 +28,7 @@ function App() {
         1,
         new Uint8Array(GET_UID_APDU)
       );
+      console.log(response)
       const result = await device.transferIn(1, 255);
 
       // The response contains the UID in hexadecimal format
@@ -41,60 +42,60 @@ function App() {
     }
   }
 
-  function connectTake2() {
-    navigator.usb
-      .requestDevice({ filters: [] })
-      .then((device) => {
-        return device
-          .open()
-          .then(() => {
-            // Connection established, do something with the device
-            console.log('connect success')
-          })
-          .catch((error) => {
-            // Handle error
-            console.log(error)
-          });
-      })
-      .catch((error) => {
-        // Handle permission denied or other errors
-      });
-  }
+  // function connectTake2() {
+  //   navigator.usb
+  //     .requestDevice({ filters: [] })
+  //     .then((device) => {
+  //       return device
+  //         .open()
+  //         .then(() => {
+  //           // Connection established, do something with the device
+  //           console.log('connect success')
+  //         })
+  //         .catch((error) => {
+  //           // Handle error
+  //           console.log(error)
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       // Handle permission denied or other errors
+  //     });
+  // }
 
-  function requestDevices() {
-    navigator.usb
-      .requestDevice({ filters: [] })
-      .then((device) => {
-        console.log(device);
-        device.open().then(() => {
-          console.log("opened");
-          device
-            .transferIn(1, 8)
-            .then((result) => {
-              // Data received successfully
-              const data = new Uint8Array(result.data.buffer);
-              console.log(data);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        });
-        setDevice(device);
-      })
-      .catch((e) => {
-        console.log("navigator.usb err: ", e);
-      });
+  // function requestDevices() {
+  //   navigator.usb
+  //     .requestDevice({ filters: [] })
+  //     .then((device) => {
+  //       console.log(device);
+  //       device.open().then(() => {
+  //         console.log("opened");
+  //         device
+  //           .transferIn(1, 8)
+  //           .then((result) => {
+  //             // Data received successfully
+  //             const data = new Uint8Array(result.data.buffer);
+  //             console.log(data);
+  //           })
+  //           .catch((error) => {
+  //             console.log(error);
+  //           });
+  //       });
+  //       setDevice(device);
+  //     })
+  //     .catch((e) => {
+  //       console.log("navigator.usb err: ", e);
+  //     });
 
-    console.log(navigator.usb);
-    navigator.usb.getDevices().then((devices) => {
-      console.log(`Total devices: ${devices.length}`);
-      devices.forEach((device) => {
-        console.log(
-          `Product name: ${device.productName}, serial number ${device.serialNumber}`
-        );
-      });
-    });
-  }
+  //   console.log(navigator.usb);
+  //   navigator.usb.getDevices().then((devices) => {
+  //     console.log(`Total devices: ${devices.length}`);
+  //     devices.forEach((device) => {
+  //       console.log(
+  //         `Product name: ${device.productName}, serial number ${device.serialNumber}`
+  //       );
+  //     });
+  //   });
+  // }
 
   return (
     <div className="App">
@@ -107,7 +108,6 @@ function App() {
         </h6>
         <button
           onClick={() => {
-            console.log("on click");
             connect();
           }}
         >
