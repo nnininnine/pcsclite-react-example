@@ -10,16 +10,14 @@ function App() {
   async function connect() {
     try {
       // Request permission to access the USB device
-      const device = await navigator.usb.requestDevice({
-        filters: [],
-      });
+      const device = await navigator.usb.requestDevice({ filters: [] });
 
       // Open the device
       await device.open();
 
       // Select the first configuration and interface
-      // await device.selectConfiguration(1);
-      // await device.claimInterface(0);
+      await device.selectConfiguration(1);
+      await device.claimInterface(0);
 
       setDevice(device);
 
@@ -28,7 +26,7 @@ function App() {
         1,
         new Uint8Array(GET_UID_APDU)
       );
-      console.log(response)
+      console.log(response);
       const result = await device.transferIn(1, 255);
 
       // The response contains the UID in hexadecimal format
