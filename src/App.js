@@ -51,6 +51,7 @@ function App() {
           })
           .catch((error) => {
             // Handle error
+            console.log(error)
           });
       })
       .catch((error) => {
@@ -105,7 +106,7 @@ function App() {
         <button
           onClick={() => {
             console.log("on click");
-            connectTake2();
+            connect();
           }}
         >
           Connect device
