@@ -39,6 +39,25 @@ function App() {
     }
   }
 
+  function connectTake2() {
+    navigator.usb
+      .requestDevice({ filters: [] })
+      .then((device) => {
+        return device
+          .open()
+          .then(() => {
+            // Connection established, do something with the device
+            console.log('connect success')
+          })
+          .catch((error) => {
+            // Handle error
+          });
+      })
+      .catch((error) => {
+        // Handle permission denied or other errors
+      });
+  }
+
   function requestDevices() {
     navigator.usb
       .requestDevice({ filters: [] })
