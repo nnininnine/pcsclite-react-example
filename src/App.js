@@ -12,6 +12,8 @@ function App() {
       // Request permission to access the USB device
       const device = await navigator.usb.requestDevice({ filters: [] });
 
+      console.log(device)
+
       // Open the device
       await device.open();
 
