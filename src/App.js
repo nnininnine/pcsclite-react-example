@@ -12,7 +12,7 @@ function App() {
       // Request permission to access the USB device
       const device = await navigator.usb.requestDevice({ filters: [] });
 
-      console.log(device)
+      console.log(device);
 
       // Open the device
       await device.open();
@@ -96,6 +96,15 @@ function App() {
   //     });
   //   });
   // }
+
+  React.useEffect(() => {
+    window.navigator.usb.addEventListener("connect", (connectEvent) => {
+      console.log("reader connect");
+    });
+    window.navigator.usb.addEventListener("disconnect", (connectEvent) => {
+      console.log("reader disconnect");
+    });
+  }, []);
 
   return (
     <div className="App">
